@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Slow Coffee — 시간이 천천히 흐르는 곳</title>
+  
+  <!-- CSS 및 글꼴 설정 -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Tailwind 테마 커스텀 설정 (Earthy Elegance 디자인 토큰 반영) -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#faf9f6",
+            "surface-dim": "#dbdad7",
+            "surface-bright": "#faf9f6",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f4f3f1",
+            "surface-container": "#efeeeb",
+            "surface-container-high": "#e9e8e5",
+            "surface-container-highest": "#e3e2e0",
+            "on-surface": "#1a1c1a",
+            "on-surface-variant": "#4e453d",
+            "inverse-surface": "#2f312f",
+            "inverse-on-surface": "#f2f1ee",
+            "outline": "#80756c",
+            "outline-variant": "#d2c4ba",
+            "surface-tint": "#725a42",
+            
+            "primary": "#33210d",
+            "on-primary": "#ffffff",
+            "primary-container": "#4b3621",
+            "on-primary-container": "#bd9f83",
+            "inverse-primary": "#e1c1a4",
+            
+            "secondary": "#725a39",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fbdbb0",
+            "on-secondary-container": "#765f3d",
+            
+            "tertiary": "#242516",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#3a3b2a",
+            "on-tertiary-container": "#a4a58f",
+            
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            
+            "background": "#faf9f6",
+            "on-background": "#1a1c1a"
+          },
+          fontFamily: {
+            "serif": ["EB Garamond", "serif"],
+            "sans": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "4px",
+            "lg": "8px",
+            "xl": "12px",
+            "full": "9999px"
+          },
+          spacing: {
+            "stack-lg": "80px",
+            "stack-md": "32px",
+            "stack-sm": "16px",
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "container-max": "1200px"
+          },
+          boxShadow: {
+            "ethereal": "0px 10px 30px rgba(75, 54, 33, 0.04)",
+            "hover-card": "0px 15px 35px rgba(75, 54, 33, 0.08)"
+          }
+        }
+      }
+    };
+  </script>
+  
+  <style>
+    /* Google Material Symbols 전용 가상 클래스 설정 */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 350, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* EB Garamond 폰트를 위한 타이포 스타일 보완 */
+    .brand-title {
+      font-family: 'EB Garamond', serif;
+      font-feature-settings: "lnum" 1;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-sans antialiased pb-24 md:pb-0 overflow-x-hidden">
+
+  <!-- Top Navigation Bar (Header) -->
+  <header id="app-header" class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-md shadow-ethereal transition-all duration-300 border-b border-outline-variant/10">
+    <div class="flex justify-between items-center px-6 md:px-12 h-16 w-full max-w-container-max mx-auto">
+      <a href="#hero" class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
+        <span class="material-symbols-outlined text-2xl">coffee_maker</span>
+        <span class="brand-title text-xl font-semibold tracking-tight">Slow Coffee</span>
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-8">
+        <a href="#hero" class="nav-link font-sans text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Home</a>
+        <a href="#menu" class="nav-link font-sans text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Menu</a>
+        <a href="#visit" class="nav-link font-sans text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Visit</a>
+      </nav>
+      
+      <div class="flex items-center gap-2">
+        <!-- Notification button or reservation sim -->
+        <button id="book-trigger" aria-label="Book a table" class="hidden sm:flex items-center gap-1.5 border border-primary/20 hover:border-primary/60 bg-surface-container-lowest text-primary text-xs font-semibold px-4 py-2 rounded transition-all active:scale-95">
+          <span class="material-symbols-outlined text-sm">event_seat</span>
+          <span>Book Table</span>
+        </button>
+        
+        <!-- Toggle button for mobile nav menu -->
+        <button id="hamburger-btn" aria-label="Toggle navigation menu" class="text-primary hover:bg-primary/5 transition-colors rounded p-2 active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sliding Mobile Side Menu -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-primary/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="mobile-sidebar" class="fixed top-0 right-0 h-full w-80 bg-surface-container-lowest z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col">
+    <div class="flex justify-between items-center px-6 h-16 border-b border-outline-variant/20">
+      <span class="brand-title text-lg font-medium text-primary">Slow Coffee</span>
+      <button id="close-menu-btn" aria-label="Close menu" class="text-on-surface-variant hover:text-primary p-1.5 rounded-full hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+    <div class="flex-1 px-6 py-8 flex flex-col gap-6">
+      <a href="#hero" class="mobile-nav-link text-lg font-medium text-on-surface-variant hover:text-primary flex items-center gap-3 transition-colors">
+        <span class="material-symbols-outlined text-xl">home</span> Home
+      </a>
+      <a href="#menu" class="mobile-nav-link text-lg font-medium text-on-surface-variant hover:text-primary flex items-center gap-3 transition-colors">
+        <span class="material-symbols-outlined text-xl">menu_book</span> Signature Menu
+      </a>
+      <a href="#visit" class="mobile-nav-link text-lg font-medium text-on-surface-variant hover:text-primary flex items-center gap-3 transition-colors">
+        <span class="material-symbols-outlined text-xl">location_on</span> Visit Store
+      </a>
+      
+      <div class="h-[1px] bg-outline-variant/30 my-2"></div>
+      
+      <div class="flex flex-col gap-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-outline text-[11px]">Follow our journey</span>
+        <div class="flex gap-4">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="text-on-surface-variant hover:text-primary w-10 h-10 rounded-full bg-surface-container flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-lg">camera_alt</span>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="text-on-surface-variant hover:text-primary w-10 h-10 rounded-full bg-surface-container flex items-center justify-center transition-colors">
+            <span class="material-symbols-outlined text-lg">public</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="p-6 border-t border-outline-variant/10 text-center bg-surface-container-low">
+      <button id="mobile-book-btn" class="w-full bg-primary text-on-primary font-medium py-3 rounded active:scale-[0.98] transition-all">
+        Book Table (Free)
+      </button>
+    </div>
+  </aside>
+
+  <!-- Table Reservation Modal -->
+  <dialog id="reserve-dialog" class="bg-transparent backdrop:bg-primary/20 backdrop:backdrop-blur-sm border-none p-4 max-w-md w-full focus:outline-none">
+    <div class="bg-surface-container-lowest rounded-xl shadow-2xl overflow-hidden border border-outline-variant/20">
+      <div class="p-6 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low">
+        <h3 class="brand-title text-lg font-medium text-primary flex items-center gap-2">
+          <span class="material-symbols-outlined">coffee</span> Reservation
+        </h3>
+        <button id="close-dialog-btn" class="p-1 rounded-full hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="reserve-form" class="p-6 flex flex-col gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="user-name">NAME</label>
+          <input type="text" id="user-name" required placeholder="Ex. 김슬로" class="w-full bg-surface-container border border-outline-variant/40 rounded px-3 py-2 text-sm focus:outline-none focus:border-primary transition-colors" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="reserve-date">DATE</label>
+            <input type="date" id="reserve-date" required class="w-full bg-surface-container border border-outline-variant/40 rounded px-3 py-2 text-sm focus:outline-none focus:border-primary transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="reserve-time">TIME</label>
+            <input type="time" id="reserve-time" required class="w-full bg-surface-container border border-outline-variant/40 rounded px-3 py-2 text-sm focus:outline-none focus:border-primary transition-colors" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-on-surface-variant mb-1" for="guests">COUNT</label>
+          <select id="guests" class="w-full bg-surface-container border border-outline-variant/40 rounded px-3 py-2 text-sm focus:outline-none focus:border-primary transition-colors">
+            <option>1 Person</option>
+            <option selected>2 People</option>
+            <option>3 People</option>
+            <option>4 People</option>
+            <option>5+ People</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full mt-2 bg-primary hover:bg-primary/95 text-on-primary text-sm font-semibold py-3 rounded active:scale-[0.98] transition-transform">
+          Request Booking
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Main Content Space -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="relative w-full h-[640px] md:h-[720px] flex items-center justify-center overflow-hidden">
+      <!-- Background Graphic & Overlays -->
+      <div class="absolute inset-0 w-full h-full">
+        <img alt="Slow Coffee Hero Atmosphere" class="w-full h-full object-cover transition-transform duration-[8s] hover:scale-105" referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCvaGI5Qb8xTXGcl-gfGFAt6y9klQ9RXjyB86npJDUEGwnsec-vZv-cjoN-saE6qvLzlo7tz8NV7TTQGuX5DrSo8d6kU2HOghW5oAn3qx28sD0D2diHohuyP-Pobe9fY7MqNzSMy0PrwCWvnB34m8tr6MVM-KnoATiGfeWjtdWbzjZmRL-SgT1zDCeW1N2Dx-YpMplw8u72kOD57qMPbh9sgeD0nn9KxmSfVeZeYehBsitgVPBeCA2ieAh4XyIn0jgelc0zv_5rmI"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/30 to-primary/20"></div>
+      </div>
+      
+      <!-- Content Box -->
+      <div class="relative z-10 text-center px-4 flex flex-col items-center gap-6 max-w-3xl mx-auto animate-fade-in">
+        <div class="w-16 h-[1px] bg-secondary-container/80 mb-2"></div>
+        <h2 class="brand-title text-4xl sm:text-5xl md:text-6xl text-surface-container-lowest font-medium tracking-tight leading-tight md:leading-none">
+          시간이 천천히 흐르는 곳
+        </h2>
+        <p class="font-sans text-base sm:text-lg md:text-xl text-surface-container-low max-w-lg leading-relaxed font-light">
+          엄선된 원두의 깊은 풍미와 함께 진정한 휴식을 경험하세요.
+        </p>
+        <div class="flex items-center gap-4 mt-4">
+          <a href="#menu" class="bg-secondary-container text-primary font-sans text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded hover:bg-secondary-container/90 transition-all active:scale-95 shadow-lg shadow-black/10">Browse Menu</a>
+          <a href="#visit" class="bg-transparent text-surface-container border border-surface-container/30 hover:border-surface-container font-sans text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded backdrop-blur-sm transition-all active:scale-95">Find Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 px-6 md:px-12 max-w-container-max mx-auto scroll-mt-10">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold text-secondary uppercase tracking-widest block mb-2">Our Artisanal Craft</span>
+        <h2 class="brand-title text-3xl md:text-4xl text-primary font-medium">Signature Menu</h2>
+        <div class="w-12 h-0.5 bg-secondary mx-auto mt-4 rounded-full"></div>
+      </div>
+      
+      <!-- Menu Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Menu Item 1 -->
+        <article class="bg-tertiary text-on-tertiary flex flex-col items-center text-center p-8 rounded-lg border border-outline-variant/5 hover:shadow-hover-card hover:-translate-y-1 transition-all duration-300 group">
+          <div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-surface-container shadow-lg transition-transform duration-500 group-hover:scale-105">
+            <img alt="Hand Drip Coffee" class="w-full h-full object-cover" referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNW8NNW9AzYWhSw1lmij8wZys7gae8us2GoG1nSsxJiZzQw0uTQ6IM5-zNQsCMScyB5ZIaG09FSStnVn5ub467TikzVUKyeXDrqZpnszPNI-HNYKp79Q-O3U5jipoCubhGTF62wUT0cvOv3VwCGwOGAZHQxs9avHh6OgcuYSbVwNCHNzsvFQAA8wKdGT1udLpzeEXfoB9KmRM_86LLwIB-TJwD7HrQZ1vth8EHq8CReVBwQ3D4P7O-NDyBMe72YZYnBaOXrsvOMGk"/>
+          </div>
+          <h3 class="brand-title text-xl md:text-2xl text-on-primary mb-2">Hand Drip Coffee</h3>
+          <p class="font-sans text-sm text-outline-variant/90 mb-5 leading-relaxed min-h-[40px] max-w-[240px]">
+            Single origin beans brewed to perfection.
+          </p>
+          <span class="font-sans text-xs font-bold text-primary bg-secondary-container px-4 py-1.5 rounded-full transition-transform group-hover:scale-115">
+            $6.0
+          </span>
+        </article>
+
+        <!-- Menu Item 2 -->
+        <article class="bg-tertiary text-on-tertiary flex flex-col items-center text-center p-8 rounded-lg border border-outline-variant/5 hover:shadow-hover-card hover:-translate-y-1 transition-all duration-300 group">
+          <div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-surface-container shadow-lg transition-transform duration-500 group-hover:scale-105">
+            <img alt="Oat Milk Latte" class="w-full h-full object-cover" referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnSIfbGeRf3XSKTbwRV07PEbx4jnbzOqWWAdcLLz_Ir59I3dpbfwbYj4C2ZkdZvUzkd4d2xVyeag-MxEoumhCj_LCSuH1gO53_Knm7ffY5R0co-eOEvMst7cu_xRQgjDhSoGFNUq9jYfYPcwHqBY0JYkPR2rHbk_jIpx9pq7w74rLn8VPu7wLLeYrOjdDbhhdIor-Qcer3TN3gu66IQrPQKF0w_6rj_3tUmipjpNKYXlebgN1CvWO2QWtEAruR5fIliGyNDql2XOw"/>
+          </div>
+          <h3 class="brand-title text-xl md:text-2xl text-on-primary mb-2">Oat Milk Latte</h3>
+          <p class="font-sans text-sm text-outline-variant/90 mb-5 leading-relaxed min-h-[40px] max-w-[240px]">
+            Creamy oat milk paired with our house espresso.
+          </p>
+          <span class="font-sans text-xs font-bold text-primary bg-secondary-container px-4 py-1.5 rounded-full transition-transform group-hover:scale-115">
+            $6.5
+          </span>
+        </article>
+
+        <!-- Menu Item 3 -->
+        <article class="bg-tertiary text-on-tertiary flex flex-col items-center text-center p-8 rounded-lg border border-outline-variant/5 hover:shadow-hover-card hover:-translate-y-1 transition-all duration-300 group">
+          <div class="w-32 h-32 rounded-full overflow-hidden mb-6 border-4 border-surface-container shadow-lg transition-transform duration-500 group-hover:scale-105">
+            <img alt="Homemade Lemon Scone" class="w-full h-full object-cover" referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtGowN9T18LClMJoE6S6g92yKyCf7rm9j2fUQfluAgaH0uIAL0Y4F6m-9KbMazXodXUMkhnxvNpAxeFN2E8bG8zu5B-3CnCrOBAZe2O4SjZUsmLmvD-baICxCC56ba7IZHidyr63NxaosPg8rKvoSGSeyyLUH-dDmwuWsGksm_mFz9n688H7wbyWPkg-urpK8WgLV3OZ_hYnrBwxhiYbZiY6ajBRBCTVRJ4Hjfd9tJMKcMAu1meYmUgpbjCD8F_9OFA0Vto016NkU"/>
+          </div>
+          <h3 class="brand-title text-xl md:text-2xl text-on-primary mb-2">Homemade Lemon Scone</h3>
+          <p class="font-sans text-sm text-outline-variant/90 mb-5 leading-relaxed min-h-[40px] max-w-[240px]">
+            Freshly baked daily with a hint of citrus.
+          </p>
+          <span class="font-sans text-xs font-bold text-primary bg-secondary-container px-4 py-1.5 rounded-full transition-transform group-hover:scale-115">
+            $4.5
+          </span>
+        </article>
+      </div>
+    </section>
+
+    <!-- Location / Visit Us Section -->
+    <section id="visit" class="py-20 px-6 md:px-12 bg-surface-container-low border-y border-outline-variant/20 scroll-mt-10">
+      <div class="max-w-container-max mx-auto flex flex-col lg:flex-row gap-12 items-center">
+        
+        <!-- Text & Info Area -->
+        <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-6 animate-slide-up">
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block">Offline Space</span>
+          <h2 class="brand-title text-3xl md:text-4xl text-primary font-medium">Visit Us</h2>
+          <div class="w-12 h-0.5 bg-secondary lg:mx-0 mx-auto rounded-full"></div>
+          
+          <div class="flex flex-col gap-4 mt-4 w-full">
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-surface-container/60 hover:bg-surface-container transition-all">
+              <span class="material-symbols-outlined text-secondary text-2xl mt-0.5">location_on</span>
+              <div class="text-left">
+                <span class="text-xs uppercase tracking-wider text-outline block font-semibold mb-0.5">Address</span>
+                <p class="font-sans text-sm md:text-base text-on-surface">서울시 성수동 카페거리 123-4</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4 p-4 rounded-lg bg-surface-container/60 hover:bg-surface-container transition-all">
+              <span class="material-symbols-outlined text-secondary text-2xl mt-0.5">schedule</span>
+              <div class="text-left">
+                <span class="text-xs uppercase tracking-wider text-outline block font-semibold mb-0.5">Operating Hours</span>
+                <p class="font-sans text-sm md:text-base text-on-surface">Daily 10:00 - 21:00</p>
+              </div>
+            </div>
+          </div>
+          
+          <a id="find-map-btn" href="https://maps.google.com" target="_blank" rel="noopener" class="mt-4 bg-primary hover:bg-primary/95 text-on-primary font-sans text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded flex items-center gap-2 active:scale-95 transition-all shadow-md">
+            <span class="material-symbols-outlined text-[18px]">map</span>
+            Find on Map
+          </a>
+        </div>
+        
+        <!-- Interactive Style Map Area -->
+        <div class="w-full lg:w-1/2 h-[340px] rounded-xl overflow-hidden bg-surface-container-highest border border-outline-variant/30 relative shadow-lg group">
+          <img alt="Seongsu-dong Map Visual" class="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105" referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIcFl7m8oCcEpdPSRWCCrvNrwbOeHAVqtGeqUyPeFfsIOI4oT23qiprgrDKrUT8fOySsyoJ41MM3zFPy_cLGy25Opb2_OfXfOb3uL2o_4HeDoxp87VpEgWkTciM-iVgtR0Kaav6zGIsHTZXLps1pUU0Tn0UbiDKtmfSxSzpO2FfVOkAHMcmhxjcy8ZyxZjU8Hn54-yqP6dKDRF2L-CcNUHqxtAjNEzmT_zp8UtI_Jjdc3PpRYADKMRgwprs_LFgSkTMsMprC4vIsM"/>
+          <div class="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-all pointer-events-none"></div>
+          
+          <!-- Focal Anchor Spot Pin -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="relative">
+              <span class="material-symbols-outlined fill-icon text-primary text-[48px] drop-shadow-xl animate-bounce">location_on</span>
+              <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[3px] bg-black/25 rounded-full blur-[1px]"></span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar for Mobile-Only Interface -->
+  <nav id="mobile-nav-bar" class="md:hidden fixed bottom-0 left-0 w-full z-40 bg-surface/85 backdrop-blur-md shadow-2xl border-t border-outline-variant/20 rounded-t-2xl transition-all duration-300">
+    <div class="flex justify-around items-center px-4 py-3 pb-6">
+      
+      <a href="#hero" class="mobile-tab-item flex flex-col items-center justify-center text-on-surface-variant flex-1 transition-all py-1 rounded" data-target="hero">
+        <span class="material-symbols-outlined text-2xl transition-all">home</span>
+        <span class="font-sans text-[10px] font-bold uppercase tracking-wider mt-1 scale-90">Home</span>
+      </a>
+      
+      <a href="#menu" class="mobile-tab-item flex flex-col items-center justify-center text-on-surface-variant flex-1 transition-all py-1 rounded" data-target="menu">
+        <span class="material-symbols-outlined text-2xl transition-all">menu_book</span>
+        <span class="font-sans text-[10px] font-bold uppercase tracking-wider mt-1 scale-90">Menu</span>
+      </a>
+      
+      <a href="#visit" class="mobile-tab-item flex flex-col items-center justify-center text-on-surface-variant flex-1 transition-all py-1 rounded" data-target="visit">
+        <span class="material-symbols-outlined text-2xl transition-all">location_on</span>
+        <span class="font-sans text-[10px] font-bold uppercase tracking-wider mt-1 scale-90">Visit</span>
+      </a>
+      
+    </div>
+  </nav>
+
+  <!-- Footers -->
+  <footer class="w-full py-12 bg-surface-container border-t border-outline-variant/20 pb-32 md:pb-12 text-on-surface-variant">
+    <div class="flex flex-col items-center gap-6 px-6 text-center max-w-container-max mx-auto">
+      
+      <div class="flex items-center gap-2 text-primary">
+        <span class="material-symbols-outlined">coffee_maker</span>
+        <span class="brand-title font-medium text-lg tracking-tight">Slow Coffee</span>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-6 md:gap-8 my-2">
+        <a class="font-sans text-sm hover:text-primary transition-colors duration-200" href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a class="font-sans text-sm hover:text-primary transition-colors duration-200" href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a class="font-sans text-sm hover:text-primary transition-colors duration-200" href="#">Privacy Policy</a>
+      </div>
+      
+      <p class="font-sans text-xs tracking-wide text-outline opacity-80">
+        © 2026 Slow Coffee Movement. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Vanilla JS 로직 구성 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 모바일 네비게이션 드로어(Sidebar) 토글 제어
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const mobileSidebar = document.getElementById('mobile-sidebar');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      
+      function openMobileMenu() {
+        mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        mobileSidebar.classList.remove('translate-x-full');
+      }
+      
+      function closeMobileMenu() {
+        mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+        mobileSidebar.classList.add('translate-x-full');
+      }
+      
+      hamburgerBtn.addEventListener('click', openMobileMenu);
+      closeMenuBtn.addEventListener('click', closeMobileMenu);
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+      mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+      // 테이블 예약 Modal (Dialolg) 컨트롤
+      const reserveDialog = document.getElementById('reserve-dialog');
+      const bookTrigger = document.getElementById('book-trigger');
+      const mobileBookBtn = document.getElementById('mobile-book-btn');
+      const closeDialogBtn = document.getElementById('close-dialog-btn');
+      const reserveForm = document.getElementById('reserve-form');
+      
+      function openDialog() {
+        reserveDialog.showModal();
+        closeMobileMenu(); // 모바일 메뉴가 열려있을 경우 안전히 닫기
+      }
+      
+      function closeDialog() {
+        reserveDialog.close();
+      }
+      
+      bookTrigger.addEventListener('click', openDialog);
+      mobileBookBtn.addEventListener('click', openDialog);
+      closeDialogBtn.addEventListener('click', closeDialog);
+      
+      // 폼 전송 액션 시뮬레이션
+      reserveForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const guestName = document.getElementById('user-name').value;
+        const guestDate = document.getElementById('reserve-date').value;
+        const guestTime = document.getElementById('reserve-time').value;
+        
+        alert(`인증 신청 완료!\n\n예약자: ${guestName}님\n날짜: ${guestDate}\n시간: ${guestTime}\n\n슬로우 커피 매장에 예약 신청이 무사히 전달되었습니다. 등록된 이메일 또는 연락처로 빠른 시일 내에 연락을 드리겠습니다!`);
+        reserveForm.reset();
+        closeDialog();
+      });
+
+      // 스크롤 감지 및 현재 섹션에 기반한 하단 활성 탭 하이라이트 활성화
+      const sections = ['hero', 'menu', 'visit'];
+      const observerOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px', // 화면의 중간 지점을 통과할 때 감지
+        threshold: 0
+      };
+      
+      const tabItems = document.querySelectorAll('.mobile-tab-item');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.id;
+            
+            tabItems.forEach(tab => {
+              const targetId = tab.getAttribute('data-target');
+              if (targetId === currentId) {
+                // Active 탭 스타일 부여 (Primary 컨테이너 풍)
+                tab.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+                tab.classList.remove('text-on-surface-variant');
+                const icon = tab.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.add('fill-icon');
+              } else {
+                // 비활성 탭 복구
+                tab.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                tab.classList.add('text-on-surface-variant');
+                const icon = tab.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.remove('fill-icon');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+      
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      // 헤더 스크롤 플로팅 스타일링 전환 효과
+      const header = document.getElementById('app-header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.remove('bg-surface/40');
+          header.classList.add('bg-surface/95', 'shadow-lg');
+        } else {
+          header.classList.add('bg-surface/40');
+          header.classList.remove('bg-surface/95', 'shadow-lg');
+        }
+      });
+      
+    });
+  </script>
+</body>
+</html>
